@@ -1,9 +1,9 @@
-var Event = (function () {
-  var Event,
+const Event = (function () {
+  let Event,
     _default = 'default';
 
   Event = function () {
-    var _listen,
+    let _listen,
       _trigger,
       _remove,
       _shift = Array.prototype.shift,
@@ -15,9 +15,9 @@ var Event = (function () {
     // @ary 传入的一个数组对象 array
     // @fn 传入回调函数
     each = function (ary, fn) {
-      var ret;
-      for (var i = 0, l = ary.length; i < l; i++) {
-        var n = ary[i];
+      let ret;
+      for (let i = 0, l = ary.length; i < l; i++) {
+        let n = ary[i];
         ret = fn.call(n, i, n);
       }
       return ret;
@@ -39,7 +39,7 @@ var Event = (function () {
     _remove = function (key, cache, fn) {
       if (cache[key]) {
         if (fn) {
-          for (var i = cache[key].length; i >= 0; i--) {
+          for (let i = cache[key].length; i >= 0; i--) {
             if (cache[key] === fn) {
               cache[key].splice(i, 1);
             }
@@ -55,17 +55,17 @@ var Event = (function () {
       // 接受的参数第一个是 cache 对象，
       // 即保存所有 events 对象，利用 Array.prototype.shift() 进行弹出，
       // 保存到当前 scope 的变量里
-      var cache = _shift.call(arguments);
+      let cache = _shift.call(arguments);
 
       // key 即是需要触发的 eventName
-      var key = _shift.call(arguments);
+      let key = _shift.call(arguments);
 
       // 在将保存 event 信息的对象，和作为 key 的 eventName 的参数弹出后，
       // 传入函数的具体参数，数组对象
-      var args = arguments;
+      let args = arguments;
 
       // 保存一个指向 Event 对象的 ref
-      var _self = this,
+      let _self = this,
 
       // 取出 key 对应保存下来的所有回调函数
       stack = cache[key];
@@ -85,13 +85,13 @@ var Event = (function () {
     _create = function (namespace) {
 
       // 保存命名空间的对象，_default => 'default'
-      var namespace = namespace || _default;
+      let namespace = namespace || _default;
 
       // 保存所有 eventName，fn 键值对的对象
-      var cache = {};
+      let cache = {};
 
       // 离线事件
-      var offlineStack = [],
+      let offlineStack = [],
 
       ret = {
         // 调用 _listen() 方法，监听 key 所对应的事件
@@ -135,9 +135,9 @@ var Event = (function () {
         },
 
         trigger: function () {
-          var fn;
-          var args;
-          var _self = this;
+          let fn;
+          let args;
+          let _self = this;
 
           // 见 _trigger() 方法，
           // 这里将 cache （保存下来的所有 event）
@@ -184,22 +184,22 @@ var Event = (function () {
     return {
       create: _create,
       one: function (key, fn, last) {
-        var event = this.create();
+        let event = this.create();
         event.one(key, fn, last);
       },
 
       remove: function (key, fn) {
-        var event = this.create();
+        let event = this.create();
         event.remove(key, fn);
       },
 
       listen: function (key, fn, last) {
-        var event = this.create();
+        let event = this.create();
         event.listen(key, fn, last);
       },
 
       trigger: function () {
-        var event = this.create();
+        let event = this.create();
         event.trigger.apply(this, arguments);
       }
     };
