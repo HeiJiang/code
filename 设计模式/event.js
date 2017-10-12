@@ -6,6 +6,7 @@ const Event = (function () {
     let _listen,
       _trigger,
       _remove,
+
       _shift = Array.prototype.shift,
       _unshift = Array.prototype.unshift,
       namespaceCache = {},
