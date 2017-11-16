@@ -23,6 +23,7 @@ var LoginController = {
         "Password must be 5+ characters!"
       );
     }
+    
     // 如果执行到这里说明通过验证
     return true;
   },
